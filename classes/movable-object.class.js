@@ -24,38 +24,42 @@ class MovableObject {
         return this.y < 130;
     }
 
-// loadImage('img/test.png')
-loadImage(path) {
-    this.img = new Image();
-    this.img.src = path;
-}
+    // loadImage('img/test.png')
+    loadImage(path) {
+        this.img = new Image();
+        this.img.src = path;
+    }
 
-/**
- * 
- * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]
- */
-loadImages(arr) {
-    arr.forEach((path) => {
-        let img = new Image();
-        img.src = path;
-        this.imageCache[path] = img;
-    });
-}
+    /**
+     * 
+     * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]
+     */
+    loadImages(arr) {
+        arr.forEach((path) => {
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = img;
+        });
+    }
 
-moveRight() {
-    console.log('Moving right');
-}
+    moveRight() {
+        this.x += this.speed;
+        this.otherDirection = false;
+        this.walking_sound.play();
+    }
 
-moveLeft() {
-    setInterval(() => {
-        this.x -= this.speed;
-    }, 1000 / 60);
-}
+    moveLeft() {
+            this.x -= this.speed;
+    }
 
-playAnimation() {
-    let i = this.currentImage % this.images_walking.length;
-    let path = this.images_walking[i];
-    this.img = this.imageCache[path];
-    this.currentImage++;
-}
+    playAnimation(images) {
+        let i = this.currentImage % this.images_walking.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
+    jump() {
+        this.speedY = 30;
+    }
 }
