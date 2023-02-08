@@ -48,21 +48,20 @@ class Character extends MovableObject {
                 this.otherDirection = true;
                 this.walking_sound.play();
             }
-            if(this.world.keyboard.SPACE && !this.isAboveGround()) {
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
         setInterval(() => {
-
-            if (this.isAboveGround()) {
-                this.playAnimation(this.images_jumping);
-            } else {
-                // Walk animation
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.images_walking);
-                }
+        if (this.isAboveGround())
+            this.playAnimation(this.images_jumping);
+        }, 150);
+        setInterval(() => {
+            // Walk animation
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimation(this.images_walking);
             }
         }, 50);
     }
