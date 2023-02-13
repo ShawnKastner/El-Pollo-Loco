@@ -9,7 +9,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/2_walk/W-23.png',
         'img/2_character_pepe/2_walk/W-24.png',
         'img/2_character_pepe/2_walk/W-25.png',
-        'img/2_character_pepe/2_walk/W-26.png',
+        'img/2_character_pepe/2_walk/W-26.png'
     ];
 
     images_jumping = [
@@ -21,7 +21,17 @@ class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-36.png',
         'img/2_character_pepe/3_jump/J-37.png',
         'img/2_character_pepe/3_jump/J-38.png',
-        'img/2_character_pepe/3_jump/J-39.png',
+        'img/2_character_pepe/3_jump/J-39.png'
+    ];
+
+    images_dead = [
+        'img/2_character_pepe/5_dead/D-51.png',
+        'img/2_character_pepe/5_dead/D-52.png',
+        'img/2_character_pepe/5_dead/D-53.png',
+        'img/2_character_pepe/5_dead/D-54.png',
+        'img/2_character_pepe/5_dead/D-55.png',
+        'img/2_character_pepe/5_dead/D-56.png',
+        'img/2_character_pepe/5_dead/D-57.png'
     ];
 
     world;
@@ -31,6 +41,7 @@ class Character extends MovableObject {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.images_walking);
         this.loadImages(this.images_jumping);
+        this.loadImages(this.images_dead);
 
         this.animate();
         this.applyGravity();
@@ -55,9 +66,11 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-        if (this.isAboveGround())
+        if(this.isDead()) {
+            this.playAnimation(this.images_dead);
+        }else if (this.isAboveGround())
             this.playAnimation(this.images_jumping);
-        }, 200);
+        }, 200)
         setInterval(() => {
             // Walk animation
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
