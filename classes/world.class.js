@@ -46,7 +46,7 @@ class World {
         this.addObjectsToMap(this.level.background);
 
         this.ctx.translate(-this.camera_x, 0);
-        // ------ Spaced for fixed objects
+        // ------ Spaced for fixed objects------
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
         this.addToMap(this.bottleBar);
