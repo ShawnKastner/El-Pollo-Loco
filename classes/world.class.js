@@ -6,6 +6,8 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    coinBar = new CoinBar();
+    bottleBar = new BottleBar();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -40,6 +42,8 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // ------ Spaced for fixed objects
         this.addToMap(this.statusBar);
+        this.addToMap(this.coinBar);
+        this.addToMap(this.bottleBar);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.clouds);
