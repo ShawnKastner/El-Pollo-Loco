@@ -11,6 +11,7 @@ class World {
     drink_sound = new Audio('audio/drinking.mp3');
     collectCoin_sound = new Audio('audio/collectCoin.mp3');
     throwAbleObject = [];
+    throwAbleObjects = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -30,6 +31,7 @@ class World {
            this.checkCollisions();
            this.checkCollisionsCoins();
            this.checkCollisionsBottles();
+           this.checkThrowObjects();
         }, 200)
     }
 
@@ -66,10 +68,9 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D) {
-            let bottle = new ThrowableObject(this.character.x, this.character.y);
+        if(this.keyboard.D) { 
+            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 100);
             this.throwAbleObjects.push(bottle);
-            this.throw();
         }
     }
 
@@ -90,6 +91,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottle);
+        this.addObjectsToMap(this.throwAbleObjects);
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
