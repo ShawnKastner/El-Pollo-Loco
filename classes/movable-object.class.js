@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     collectedCoin = 0;
+    collectedBottle = 0;
     offset = {
         top: 0,
         left: 0,
@@ -43,7 +44,11 @@ class MovableObject extends DrawableObject {
     }
 
     addCoin() {
-        this.collectedCoin += 10;
+        this.collectedCoin += 20;
+    }
+
+    addBottle() {
+        this.collectedBottle += 20;
     }
 
     isDead() {

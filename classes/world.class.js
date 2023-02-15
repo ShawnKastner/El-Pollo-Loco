@@ -33,8 +33,15 @@ class World {
             this.level.coins.forEach((coins => {
                 if (this.character.isColliding(coins)) {
                     this.character.addCoin();
-                    this.coinBar.setPercentage(this.character.collectedCoin)
+                    this.coinBar.setPercentage(this.character.collectedCoin);
                     this.level.coins.splice(coins, 1);
+                }
+            }));
+            this.level.bottle.forEach((bottles => {
+                if(this.character.isColliding(bottles)) {
+                    this.character.addBottle();
+                    this.bottleBar.setPercentage(this.character.collectedBottle);
+                    this.level.bottle.splice(bottles, 1);
                 }
             }));
         }, 200)
