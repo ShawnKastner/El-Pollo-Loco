@@ -8,6 +8,8 @@ class World {
     statusBar = new StatusBar();
     coinBar = new CoinBar();
     bottleBar = new BottleBar();
+    drink_sound = new Audio('audio/drinking.mp3');
+    collectCoin_sound = new Audio('audio/collectCoin.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -33,6 +35,7 @@ class World {
             this.level.coins.forEach((coins => {
                 if (this.character.isColliding(coins)) {
                     this.character.addCoin();
+                    this.collectCoin_sound.play();
                     this.coinBar.setPercentage(this.character.collectedCoin);
                     this.level.coins.splice(coins, 1);
                 }
@@ -40,6 +43,7 @@ class World {
             this.level.bottle.forEach((bottles => {
                 if(this.character.isColliding(bottles)) {
                     this.character.addBottle();
+                    this.drink_sound.play();
                     this.bottleBar.setPercentage(this.character.collectedBottle);
                     this.level.bottle.splice(bottles, 1);
                 }
