@@ -10,6 +10,7 @@ class World {
     bottleBar = new BottleBar();
     drink_sound = new Audio('audio/drinking.mp3');
     collectCoin_sound = new Audio('audio/collectCoin.mp3');
+    throwAbleObject = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -17,38 +18,59 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
         this.character.world = this;
     }
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy)
-                }
-            });
-            this.level.coins.forEach((coins => {
-                if (this.character.isColliding(coins)) {
-                    this.character.addCoin();
-                    this.collectCoin_sound.play();
-                    this.coinBar.setPercentage(this.character.collectedCoin);
-                    this.level.coins.splice(coins, 1);
-                }
-            }));
-            this.level.bottle.forEach((bottles => {
-                if(this.character.isColliding(bottles)) {
-                    this.character.addBottle();
-                    this.drink_sound.play();
-                    this.bottleBar.setPercentage(this.character.collectedBottle);
-                    this.level.bottle.splice(bottles, 1);
-                }
-            }));
+           this.checkCollisions();
+           this.checkCollisionsCoins();
+           this.checkCollisionsBottles();
         }, 200)
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy)
+            }
+        });
+    }
+
+    checkCollisionsCoins() {
+        this.level.coins.forEach((coins => {
+            if (this.character.isColliding(coins)) {
+                this.character.addCoin();
+                this.collectCoin_sound.play();
+                this.coinBar.setPercentage(this.character.collectedCoin);
+                this.level.coins.splice(coins, 1);
+            }
+        }));
+    }
+
+    checkCollisionsBottles() {
+        this.level.bottle.forEach((bottles => {
+            if(this.character.isColliding(bottles)) {
+                this.character.addBottle();
+                this.drink_sound.play();
+                this.bottleBar.setPercentage(this.character.collectedBottle);
+                this.throwAbleObject.push(this.collectedBottle);
+                this.level.bottle.splice(bottles, 1);
+            }
+        }));
+    }
+
+    checkThrowObjects() {
+        if(this.keyboard.D) {
+            let bottle = new ThrowableObject(this.character.x, this.character.y);
+            this.throwAbleObjects.push(bottle);
+            this.throw();
+        }
     }
 
     draw() {

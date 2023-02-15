@@ -24,21 +24,25 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 130;
+        if (this instanceof ThrowableObject) {
+            return true;
+        } else {
+            return this.y < 130;
+        }
     }
 
     // character .isColliding(chicken);
-    isColliding (mo) {
-        return  (this.x + this.width -this.offset.right) >= mo.x + mo.offset.left && this.x + this.offset.left <= (mo.x + mo.width - mo.offset.right) && 
-                (this.y + this.speedY + this.height - this.offset.bottom) >= mo.y + mo.offset.top &&
-                (this.y + this.speedY + this.offset.top) <= (mo.y + mo.height - mo.offset.bottom);
+    isColliding(mo) {
+        return (this.x + this.width - this.offset.right) >= mo.x + mo.offset.left && this.x + this.offset.left <= (mo.x + mo.width - mo.offset.right) &&
+            (this.y + this.speedY + this.height - this.offset.bottom) >= mo.y + mo.offset.top &&
+            (this.y + this.speedY + this.offset.top) <= (mo.y + mo.height - mo.offset.bottom);
     }
 
     hit() {
         this.energy -= 5;
-        if(this.energy < 0) {
+        if (this.energy < 0) {
             this.energy = 0;
-        }else {
+        } else {
             this.lastHit = new Date().getTime();
         }
     }
@@ -68,7 +72,7 @@ class MovableObject extends DrawableObject {
     }
 
     moveLeft() {
-            this.x -= this.speed;
+        this.x -= this.speed;
     }
 
     playAnimation(images) {

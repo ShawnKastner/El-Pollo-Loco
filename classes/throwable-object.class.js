@@ -1,3 +1,4 @@
-class ThrowAbleObject extends MovableObject {
-    
+class ThrowableObject extends MovableObject {
+
+
 }
