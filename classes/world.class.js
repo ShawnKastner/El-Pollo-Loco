@@ -10,8 +10,8 @@ class World {
     bottleBar = new BottleBar();
     drink_sound = new Audio('audio/drinking.mp3');
     collectCoin_sound = new Audio('audio/collectCoin.mp3');
-    throwAbleObject = [];
-    throwAbleObjects = [];
+    throwableObject = [];
+    throw = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -28,10 +28,10 @@ class World {
 
     run() {
         setInterval(() => {
-           this.checkCollisions();
-           this.checkCollisionsCoins();
-           this.checkCollisionsBottles();
-           this.checkThrowObjects();
+            this.checkCollisions();
+            this.checkCollisionsCoins();
+            this.checkCollisionsBottles();
+            this.checkThrowObjects();
         }, 200)
     }
 
@@ -57,20 +57,22 @@ class World {
 
     checkCollisionsBottles() {
         this.level.bottle.forEach((bottles => {
-            if(this.character.isColliding(bottles)) {
+            if (this.character.isColliding(bottles)) {
                 this.character.addBottle();
                 this.drink_sound.play();
                 this.bottleBar.setPercentage(this.character.collectedBottle);
-                this.throwAbleObject.push(this.collectedBottle);
                 this.level.bottle.splice(bottles, 1);
             }
         }));
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D) { 
-            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 100);
-            this.throwAbleObjects.push(bottle);
+        if (this.keyboard.D) {
+            if (this.collectedBottle > 0) {
+                let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 100);
+                this.throw.push(bottle);
+                this.collectedBottle = -20;
+            }
         }
     }
 
@@ -91,7 +93,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottle);
-        this.addObjectsToMap(this.throwAbleObjects);
+        this.addObjectsToMap(this.throw);
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);

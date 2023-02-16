@@ -89,6 +89,6 @@ class Character extends MovableObject {
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.images_walking);
             }
-        }, 50);
+        }, 100);
     }
 }
