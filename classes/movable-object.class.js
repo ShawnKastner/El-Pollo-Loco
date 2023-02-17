@@ -48,11 +48,11 @@ class MovableObject extends DrawableObject {
     }
 
     addCoin() {
-        this.collectedCoin += 20;
+        this.collectedCoin += 10;
     }
 
     addBottle() {
-        this.collectedBottle += 20;
+        this.collectedBottle += 10;
     }
 
     isDead() {

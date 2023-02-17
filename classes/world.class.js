@@ -49,8 +49,8 @@ class World {
             if (this.character.isColliding(coins)) {
                 this.character.addCoin();
                 this.collectCoin_sound.play();
-                this.coinBar.setPercentage(this.character.collectedCoin);
                 this.level.coins.splice(coins, 1);
+                this.coinBar.setPercentage(this.character.collectedCoin);
             }
         }));
     }
@@ -60,8 +60,8 @@ class World {
             if (this.character.isColliding(bottles)) {
                 this.character.addBottle();
                 this.drink_sound.play();
-                this.bottleBar.setPercentage(this.character.collectedBottle);
                 this.level.bottle.splice(bottles, 1);
+                this.bottleBar.setPercentage(this.character.collectedBottle);
             }
         }));
     }
@@ -70,7 +70,7 @@ class World {
         if (this.keyboard.D && this.character.collectedBottle > 0) {
                 let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 100);
                 this.throw.push(bottle);
-                this.character.collectedBottle -= 20;
+                this.character.collectedBottle -= 10;
                 this.bottleBar.setPercentage(this.character.collectedBottle);
         }
     }
