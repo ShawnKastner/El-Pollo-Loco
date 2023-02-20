@@ -8,6 +8,7 @@ class World {
     statusBar = new StatusBar();
     coinBar = new CoinBar();
     bottleBar = new BottleBar();
+    endbossBar = new EndbossStatus();
     drink_sound = new Audio('audio/drinking.mp3');
     collectCoin_sound = new Audio('audio/collectCoin.mp3');
     killChicken_sound = new Audio('audio/jumpOnChicken.mp3');
@@ -97,6 +98,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
         this.addToMap(this.bottleBar);
+        this.addToMap(this.endbossBar);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.clouds);
