@@ -10,6 +10,7 @@ class World {
     bottleBar = new BottleBar();
     drink_sound = new Audio('audio/drinking.mp3');
     collectCoin_sound = new Audio('audio/collectCoin.mp3');
+    killChicken_sound = new Audio('audio/jumpOnChicken.mp3');
     throwableObject = [];
     throw = [];
 
@@ -40,6 +41,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 enemy.hit();
+                this.killChicken_sound.play();
             }
         })
     }
