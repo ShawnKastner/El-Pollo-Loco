@@ -32,7 +32,16 @@ class World {
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
             this.checkThrowObjects();
+            this.checkOnTopOfEnemy();
         }, 200)
+    }
+
+    checkOnTopOfEnemy() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+                enemy.hit();
+            }
+        })
     }
 
     checkCollisions() {
@@ -68,10 +77,10 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.D && this.character.collectedBottle > 0) {
-                let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 100);
-                this.throw.push(bottle);
-                this.character.collectedBottle -= 10;
-                this.bottleBar.setPercentage(this.character.collectedBottle);
+            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 100);
+            this.throw.push(bottle);
+            this.character.collectedBottle -= 10;
+            this.bottleBar.setPercentage(this.character.collectedBottle);
         }
     }
 
