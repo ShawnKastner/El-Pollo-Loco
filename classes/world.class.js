@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    endboss = new Endboss();
     level = level1;
     canvas;
     ctx;
@@ -35,6 +36,7 @@ class World {
             this.checkCollisionsBottles();
             this.checkThrowObjects();
             this.checkOnTopOfEnemy();
+            this.checkEndbossIsDead();
         }, 200)
     }
 
@@ -46,6 +48,16 @@ class World {
             }
         })
     }
+
+    // checkEndbossIsDead() {
+    //     this.throwableObject.forEach((tO) => {
+    //         if(this.endboss.isColliding(tO)) {
+    //             this.killChicken_sound.play();
+    //             this.endboss.hit();
+    //             this.setPercentage(this.endboss.energy);
+    //         }
+    //     })
+    // }
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -107,6 +119,7 @@ class World {
         this.addObjectsToMap(this.level.bottle);
         this.addObjectsToMap(this.throw);
         this.addToMap(this.character);
+        this.addToMap(this.endboss);
 
         this.ctx.translate(-this.camera_x, 0);
 

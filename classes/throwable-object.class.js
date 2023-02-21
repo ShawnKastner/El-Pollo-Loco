@@ -25,9 +25,9 @@ class ThrowableObject extends MovableObject {
         this.height = 100;
         this.width = 100;
         this.throw();
-     }
+    }
 
-     throw() {
+    throw() {
         this.speedY = 30;
         this.applyGravity();
         this.playBottleRotation();
@@ -38,7 +38,11 @@ class ThrowableObject extends MovableObject {
 
     playBottleRotation() {
         setInterval(() => {
-            this.playAnimation(this.bottle_rotation);
+            if(this.y > 250) {
+                this.playAnimation(this.bottle_splash);
+            } else {
+                this.playAnimation(this.bottle_rotation);
+            }
         }, 100);
     }
 }
