@@ -14,7 +14,6 @@ class World {
     collectCoin_sound = new Audio('audio/collectCoin.mp3');
     killChicken_sound = new Audio('audio/jumpOnChicken.mp3');
     throwableObject = [];
-    throw = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -49,15 +48,15 @@ class World {
         })
     }
 
-    // checkEndbossIsDead() {
-    //     this.throwableObject.forEach((tO) => {
-    //         if(this.endboss.isColliding(tO)) {
-    //             this.killChicken_sound.play();
-    //             this.endboss.hit();
-    //             this.setPercentage(this.endboss.energy);
-    //         }
-    //     })
-    // }
+    checkEndbossIsDead() {
+        this.throwableObject.forEach((tO) => {
+            if(this.endboss.isColliding(tO)) {
+                this.killChicken_sound.play();
+                this.endboss.hit();
+                this.endbossBar.setPercentage(this.endboss.energy);
+            }
+        })
+    }
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -93,7 +92,7 @@ class World {
     checkThrowObjects() {
         if (this.keyboard.D && this.character.collectedBottle > 0) {
             let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 100);
-            this.throw.push(bottle);
+            this.throwableObject.push(bottle);
             this.character.collectedBottle -= 10;
             this.bottleBar.setPercentage(this.character.collectedBottle);
         }
@@ -117,7 +116,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottle);
-        this.addObjectsToMap(this.throw);
+        this.addObjectsToMap(this.throwableObject);
         this.addToMap(this.character);
         this.addToMap(this.endboss);
 
