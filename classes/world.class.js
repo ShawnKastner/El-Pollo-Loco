@@ -35,7 +35,7 @@ class World {
             this.checkCollisionsBottles();
             this.checkThrowObjects();
             this.checkOnTopOfEnemy();
-            this.checkEndbossIsDead();
+            this.checkCollisionEndboss();
         }, 200)
     }
 
@@ -48,12 +48,13 @@ class World {
         })
     }
 
-    checkEndbossIsDead() {
+    checkCollisionEndboss() {
         this.throwableObject.forEach((tO) => {
             if(this.endboss.isColliding(tO)) {
-                this.killChicken_sound.play();
                 this.endboss.hit();
                 this.endbossBar.setPercentage(this.endboss.energy);
+                this.killChicken_sound.play();
+                this.throwableObject.splice(this.throwableObject, 1);
             }
         })
     }

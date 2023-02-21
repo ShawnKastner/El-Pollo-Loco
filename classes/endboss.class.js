@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     width = 250;
     y = 55;
 
-    images_walking = [
+    images_alert = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
         'img/4_enemie_boss_chicken/2_alert/G7.png',
@@ -15,7 +15,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/2_alert/G12.png'
     ];
 
-    images_moving = [
+    images_walking = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
         'img/4_enemie_boss_chicken/1_walk/G2.png',
         'img/4_enemie_boss_chicken/1_walk/G3.png',
@@ -39,6 +39,12 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/4_hurt/G23.png'
     ];
 
+    images_dead = [
+        'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img/4_enemie_boss_chicken/5_dead/G26.png'
+    ]
+
     offset = {
         top: 50,
         bottom: 10,
@@ -47,29 +53,24 @@ class Endboss extends MovableObject {
     };
 
     constructor() {
-        super().loadImage(this.images_walking[0]);
+        super().loadImage(this.images_alert[0]);
+        this.loadImages(this.images_alert);
         this.loadImages(this.images_walking);
-        this.loadImages(this.images_moving);
+        this.loadImages(this.images_hurt);
+        this.loadImages(this.images_dead);
         this.x = 6500;
         this.animate();
     }
 
     animate() {
         setStopableInterval(() => {
-            this.playAnimation(this.images_walking);
+            if(this.isDead()) {
+                this.playAnimation(this.images_dead);
+            } else if(this.isHurt()) {
+                this.playAnimation(this.images_hurt);
+            } else {
+                this.playAnimation(this.images_alert);
+            }
         }, 200);
     }
 }
-
-        //     if(i < 8) {
-        //         this.playAnimation(this.images_walking);
-        //     } else {
-        //         this.playAnimation(this.images_moving);
-        //     }
-        //     i++;
-            
-        //     if(world.character.x > 6300 && !hadFirstContact) {
-        //         i = 0;
-        //         hadFirstContact = true;
-        //     }
-        // }, 200);
