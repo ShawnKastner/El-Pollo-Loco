@@ -41,7 +41,7 @@ class World {
 
     checkOnTopOfEnemy() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+            if (this.character.isAboveGround() && this.character.isColliding(enemy)) {
                 enemy.hit();
                 this.killChicken_sound.play();
             }
@@ -61,9 +61,9 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && !enemy.hitted == true) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy)
+                this.statusBar.setPercentage(this.character.energy);
             }
         });
     }
