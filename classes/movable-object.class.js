@@ -39,7 +39,7 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        this.energy -= 20;
+        this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -68,7 +68,6 @@ class MovableObject extends DrawableObject {
     moveRight() {
         this.x += this.speed;
         this.otherDirection = false;
-        this.walking_sound.play();
     }
 
     moveLeft() {

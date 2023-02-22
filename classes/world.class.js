@@ -51,7 +51,7 @@ class World {
     checkCollisionEndboss() {
         this.throwableObject.forEach((tO) => {
             if(this.endboss.isColliding(tO)) {
-                this.endboss.hit();
+                this.endboss.hit(this.endboss.energy -= 10);
                 this.endbossBar.setPercentage(this.endboss.energy);
                 this.killChicken_sound.play();
                 this.throwableObject.splice(this.throwableObject, 1);
