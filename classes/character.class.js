@@ -94,11 +94,12 @@ class Character extends MovableObject {
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.moveRight();
             this.walking_sound.play();
+            this.playWalkingSound();
         }
         if (this.world.keyboard.LEFT && this.x > 0) {
             this.moveLeft();
             this.otherDirection = true;
-            this.walking_sound.play();
+            this.playWalkingSound();
         }
         if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             this.jump();
@@ -116,5 +117,10 @@ class Character extends MovableObject {
         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             this.playAnimation(this.images_walking);
         }
+    }
+
+    playWalkingSound() {
+        this.walking_sound.play();
+        this.walking_sound.volume = 0.2;
     }
 }
