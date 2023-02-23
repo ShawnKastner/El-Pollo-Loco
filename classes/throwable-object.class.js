@@ -31,14 +31,20 @@ class ThrowableObject extends MovableObject {
         this.speedY = 30;
         this.applyGravity();
         this.playBottleRotation();
-        setInterval(() => {
-            this.x += 10;
-        }, 25);
+        if (!world.character.otherDirection == true) {
+            setInterval(() => {
+                this.x += 10;
+            }, 25);
+        } else {
+            setInterval(() => {
+                this.x -= 10;
+            }, 25);
+        }
     }
 
     playBottleRotation() {
         setInterval(() => {
-            if(this.y > 250) {
+            if (this.y > 250) {
                 this.playAnimation(this.bottle_splash);
             } else {
                 this.playAnimation(this.bottle_rotation);
