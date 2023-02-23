@@ -13,6 +13,8 @@ class World {
     drink_sound = new Audio('audio/drinking.mp3');
     collectCoin_sound = new Audio('audio/collectCoin.mp3');
     killChicken_sound = new Audio('audio/jumpOnChicken.mp3');
+    collectHealth_sound = new Audio('audio/collectHealth.mp3');
+    hitted_sound = new Audio('audio/hitted.mp3');
     throwableObject = [];
 
     constructor(canvas, keyboard) {
@@ -53,6 +55,7 @@ class World {
                 } if(this.character.energy < 100) {
                     this.character.energy += 20;
                 }
+                this.collectHealth_sound.play();
                 this.level.smallChicken.splice(sC, 1);
                 this.statusBar.setPercentage(this.character.energy);
             }
@@ -90,6 +93,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) & !enemy.hitted == true) {
                 this.character.hit();
+                this.hitted_sound.play();
                 this.statusBar.setPercentage(this.character.energy);
             }
         });
