@@ -33,8 +33,10 @@ class World {
             this.checkCollisions();
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
-            this.checkThrowObjects();
             this.checkOnTopOfEnemy();
+        }, 10)
+        setInterval(() => {
+            this.checkThrowObjects();
             this.checkCollisionEndboss();
         }, 200)
     }
