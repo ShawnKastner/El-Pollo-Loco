@@ -30,15 +30,18 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
             this.checkOnTopOfEnemy();
         }, 10)
         setInterval(() => {
             this.checkThrowObjects();
-            this.checkCollisionEndboss();
+            this.checkCollisionThrowableObjects();
         }, 200)
+        setInterval(() => {
+            this.checkCollisions();
+            this.checkCollisionWithEndboss();
+        }, 300)
     }
 
     checkOnTopOfEnemy() {
@@ -50,7 +53,14 @@ class World {
         })
     }
 
-    checkCollisionEndboss() {
+    checkCollisionWithEndboss() {
+        if(this.character.isColliding(this.endboss)) {
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy);
+        }
+    }
+
+    checkCollisionThrowableObjects() {
         this.throwableObject.forEach((tO) => {
             if(this.endboss.isColliding(tO)) {
                 this.endboss.hit(this.endboss.energy -= 10);
@@ -63,7 +73,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !enemy.hitted == true) {
+            if (this.character.isColliding(enemy) & !enemy.hitted == true) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
             }
