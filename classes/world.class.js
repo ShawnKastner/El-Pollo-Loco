@@ -33,6 +33,7 @@ class World {
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
             this.checkOnTopOfEnemy();
+            this.checkBonusHp();
         }, 10)
         setInterval(() => {
             this.checkThrowObjects();
@@ -42,6 +43,20 @@ class World {
             this.checkCollisions();
             this.checkCollisionWithEndboss();
         }, 300)
+    }
+
+    checkBonusHp() {
+        this.level.smallChicken.forEach((sC) => {
+            if(this.character.isColliding(sC)) {
+                if(this.character.energy > 100) {
+                    this.character.energy = 100;
+                } if(this.character.energy < 100) {
+                    this.character.energy += 20;
+                }
+                this.level.smallChicken.splice(sC, 1);
+                this.statusBar.setPercentage(this.character.energy);
+            }
+        })
     }
 
     checkOnTopOfEnemy() {

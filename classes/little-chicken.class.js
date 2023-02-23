@@ -10,8 +10,8 @@ class SmallChicken extends MovableObject {
     offset = {
         top: 10,
         bottom: 10,
-        left: 0,
-        right: 0
+        left: 5,
+        right: 5
     };
 
     constructor() {

@@ -91,5 +91,6 @@ const level1 = new Level(
         new SmallChicken(),
         new SmallChicken(),
         new SmallChicken(),
+        new SmallChicken(),
     ]
 );
