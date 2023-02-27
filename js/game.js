@@ -3,6 +3,9 @@ let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
 let i = 1;
+background_music = new Audio('audio/backgroundMusic.mp3');
+background_music.volume = 0.2;
+background_music.loop = true;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -15,6 +18,12 @@ function init() {
 function setStopableInterval(fn, time) {
     let id = setInterval(fn, time);
     intervalIds.push(id);
+}
+
+function startGame() {
+    document.getElementById('startScreen').style = 'display: none';
+    document.getElementById('canvas').style = 'display: unset';
+    background_music.play();
 }
 
 function stopGame() {
