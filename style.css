@@ -18,3 +18,21 @@ body {
 canvas {
     background-color: black;
 }
+
+.startBtn {
+    background-color: #ffe000;
+    border-radius: 8px;
+    width: 80px;
+    height: 35px;
+    font-size: 35px;
+    font-family: 'Zabars';
+    cursor: pointer;
+}
+
+.startBtnContainer {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
