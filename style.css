@@ -19,7 +19,7 @@ canvas {
     background-color: black;
 }
 
-.startBtn {
+.btn {
     background-color: #ffe000;
     border-radius: 8px;
     width: 80px;
@@ -29,14 +29,27 @@ canvas {
     cursor: pointer;
 }
 
-.startBtn:hover {
+.restartBtn {
+    width: 100px;
+}
+
+.btn:hover {
     transform: scale(1.1);
 }
 
-.startBtnContainer {
+.btnContainer {
     position: absolute;
     bottom: 30px;
     display: flex;
     justify-content: center;
     width: 100%;
+}
+
+.dNone {
+    display: none;
+}
+
+#gameOverScreenContainer {
+    position: absolute;
+    top: 0;
 }

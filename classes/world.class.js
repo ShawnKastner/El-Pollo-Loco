@@ -36,15 +36,30 @@ class World {
             this.checkCollisionsBottles();
             this.checkOnTopOfEnemy();
             this.checkBonusHp();
-        }, 10)
+        }, 50)
         setInterval(() => {
             this.checkThrowObjects();
             this.checkCollisionThrowableObjects();
+            this.gameOver();
         }, 200)
         setInterval(() => {
             this.checkCollisions();
-            this.checkCollisionWithEndboss();
-        }, 300)
+        }, 300);
+    }
+
+    gameOver() {
+        if(this.character.isDead()) {
+            this.character.playAnimation(this.character.images_dead);
+            setTimeout(() => {
+                this.showEndScreen();
+                stopGame();
+            }, 450);
+        }
+        if(this.endboss.isDead()) {
+            setTimeout(() => {
+                this.showEndScreen();
+            }, 2000)
+        }
     }
 
     checkBonusHp() {
@@ -74,6 +89,7 @@ class World {
     checkCollisionWithEndboss() {
         if(this.character.isColliding(this.endboss)) {
             this.character.hit();
+            this.hitted_sound.play();
             this.statusBar.setPercentage(this.character.energy);
         }
     }
@@ -95,6 +111,8 @@ class World {
                 this.character.hit();
                 this.hitted_sound.play();
                 this.statusBar.setPercentage(this.character.energy);
+            } if (this.character.isDead()) {
+                this.hitted_sound.pause();
             }
         });
     }
@@ -129,6 +147,12 @@ class World {
             this.bottleBar.setPercentage(this.character.collectedBottle);
         }
     }
+
+    showEndScreen() {
+        document.getElementById('gameOverScreenContainer').classList.remove('dNone');
+        background_music.pause();
+    }
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

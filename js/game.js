@@ -8,7 +8,7 @@ background_music = new Audio('audio/backgroundMusic.mp3');
 
 function init() {
     initLevel();
-    removeStyles();    
+    removeClasses();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     bgMusic();
@@ -19,9 +19,9 @@ function setStopableInterval(fn, time) {
     intervalIds.push(id);
 }
 
-function removeStyles() {
-    document.getElementById('startScreen').style = 'display: none';
-    document.getElementById('canvas').style = 'display: unset';
+function removeClasses() {
+    document.getElementById('startScreen').classList.add('dNone');
+    document.getElementById('canvas').classList.remove('dNone');
 }
 
 function bgMusic() {
