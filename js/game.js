@@ -4,14 +4,21 @@ let keyboard = new Keyboard();
 let intervalIds = [];
 let i = 1;
 background_music = new Audio('audio/backgroundMusic.mp3');
+let gameIsOver = false;
 
 
 function init() {
     initLevel();
     removeClasses();
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, gameIsOver);
     bgMusic();
+}
+
+function restartGame() {
+    init();
+    removeGameOverScreen();
+    gameIsOver = false;
 }
 
 function setStopableInterval(fn, time) {
@@ -22,6 +29,10 @@ function setStopableInterval(fn, time) {
 function removeClasses() {
     document.getElementById('startScreen').classList.add('dNone');
     document.getElementById('canvas').classList.remove('dNone');
+}
+
+function removeGameOverScreen() {
+    document.getElementById('gameOverScreenContainer').classList.add('dNone');
 }
 
 function bgMusic() {

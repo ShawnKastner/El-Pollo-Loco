@@ -17,10 +17,11 @@ class World {
     hitted_sound = new Audio('audio/hitted.mp3');
     throwableObject = [];
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, gameIsOver) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.gameIsOver = gameIsOver;
         this.draw();
         this.setWorld();
         this.run();
@@ -35,11 +36,12 @@ class World {
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
             this.checkOnTopOfEnemy();
-            this.checkBonusHp();
         }, 50)
         setInterval(() => {
+            this.checkCollisionWithEndboss();
             this.checkThrowObjects();
             this.checkCollisionThrowableObjects();
+            this.checkBonusHp();
             this.gameOver();
         }, 200)
         setInterval(() => {
@@ -52,13 +54,20 @@ class World {
             this.character.playAnimation(this.character.images_dead);
             setTimeout(() => {
                 this.showEndScreen();
-                stopGame();
-            }, 450);
+                this.resetLevel();
+            }, 1000);
+            gameIsOver = true;
+            stopGame();
+
         }
         if(this.endboss.isDead()) {
+            this.endboss.playAnimation(this.endboss.images_dead);
             setTimeout(() => {
                 this.showEndScreen();
+                this.resetLevel();
             }, 2000)
+            gameIsOver = true;
+            stopGame();
         }
     }
 
@@ -68,7 +77,7 @@ class World {
                 if(this.character.energy > 100) {
                     this.character.energy = 100;
                 } if(this.character.energy < 100) {
-                    this.character.energy += 20;
+                    this.character.energy += 10;
                 }
                 this.collectHealth_sound.play();
                 this.level.smallChicken.splice(sC, 1);
@@ -87,7 +96,7 @@ class World {
     }
 
     checkCollisionWithEndboss() {
-        if(this.character.isColliding(this.endboss)) {
+        if(this.character.isColliding(this.endboss) && !gameIsOver == true) {
             this.character.hit();
             this.hitted_sound.play();
             this.statusBar.setPercentage(this.character.energy);
@@ -107,12 +116,10 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) & !enemy.hitted == true) {
+            if (this.character.isColliding(enemy) && !enemy.hitted == true && !gameIsOver == true) {
                 this.character.hit();
                 this.hitted_sound.play();
                 this.statusBar.setPercentage(this.character.energy);
-            } if (this.character.isDead()) {
-                this.hitted_sound.pause();
             }
         });
     }
@@ -150,6 +157,50 @@ class World {
 
     showEndScreen() {
         document.getElementById('gameOverScreenContainer').classList.remove('dNone');
+        this.muteAllSounds();
+    }
+
+    resetLevel() {
+        this.resetBottles();
+        this.resetCharacter();
+        this.resetChicken();
+        this.resetCoins();
+        this.resetEndboss();
+        this.resetSmallChicken();
+    }
+
+    resetCoins() {
+        this.level.coins.splice(0, this.level.coins.length);
+        this.coinBar.setPercentage(0);
+    }
+
+    resetCharacter() {
+        this.character.energy = 100;
+    }
+
+    resetBottles() {
+        this.level.bottle.splice(0, this.level.bottle.length);
+        this.bottleBar.setPercentage(0);
+    }
+
+    resetChicken() {
+        this.level.enemies.splice(0, this.level.enemies.length);
+    }
+
+    resetSmallChicken() {
+        this.level.smallChicken.splice(0, this.level.smallChicken.length);
+    }
+
+    resetEndboss() {
+        this.endboss.energy = 100;
+    }
+
+    muteAllSounds() {
+        this.drink_sound.pause();
+        this.collectCoin_sound.pause();
+        this.killChicken_sound.pause();
+        this.collectHealth_sound.pause();
+        this.hitted_sound.pause();
         background_music.pause();
     }
 
