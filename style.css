@@ -29,6 +29,10 @@ canvas {
     cursor: pointer;
 }
 
+.startBtn:hover {
+    transform: scale(1.1);
+}
+
 .startBtnContainer {
     position: absolute;
     bottom: 30px;
