@@ -19,6 +19,11 @@ canvas {
     background-color: black;
 }
 
+.startScreenImg {
+    height: 480px;
+    width: 720px;
+}
+
 .btn {
     background-color: #ffe000;
     border-radius: 8px;
@@ -52,4 +57,21 @@ canvas {
 #gameOverScreenContainer {
     position: absolute;
     top: 0;
+}
+
+.fullscreenImg {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.fullscreenImg:hover {
+    transform: scale(1.2);
+}
+
+:fullscreen .fullScreenGame {
+    height: 100vh;
+    width: 100%;
 }
