@@ -4,6 +4,7 @@
 }
 
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,10 +14,13 @@ body {
     background-position: top;
     font-family: 'Zabars';
     font-size: 45px;
+    height: 100vh;
+    width: 100vw;
 }
 
 canvas {
     background-color: black;
+    display: block;
 }
 
 .startScreenImg {
@@ -50,7 +54,7 @@ canvas {
     width: 100%;
 }
 
-.dNone {
+.dNone, .rotateDeviceContainer{
     display: none;
 }
 
@@ -74,4 +78,69 @@ canvas {
 :fullscreen .fullScreenGame {
     height: 100vh;
     width: 100%;
+}
+
+@media only screen and (max-width: 720px) {
+    body {
+        height: 100vh;
+    }
+
+    canvas {
+        width: 100%;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .startScreenImg {
+        width: 100vw;
+    }
+
+    .rotateDeviceContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        background-color: black;
+        height: 480px;
+        width: 100%;
+    }
+
+    .rotateYourDevice {
+        color: #ffe000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    body {
+        background-image: none;
+        overflow: hidden;
+    }
+
+    .btnContainer {
+        bottom: 195px;
+    }
+
+    .startScreenImg {
+        height: 100%;
+        width: 100%;
+    }
+    
+    h1 {
+        display: none;
+    }
+
+    canvas {
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .fullscreenImg {
+        display: none;
+    }
 }
