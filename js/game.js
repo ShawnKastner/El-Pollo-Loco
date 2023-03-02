@@ -9,6 +9,7 @@ let gameIsOver = false;
 
 function init() {
     initLevel();
+    bindBtnPress();
     removeClasses();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard, gameIsOver);
@@ -29,6 +30,9 @@ function setStopableInterval(fn, time) {
 function removeClasses() {
     document.getElementById('startScreen').classList.add('dNone');
     document.getElementById('canvas').classList.remove('dNone');
+    if(window.innerHeight <= 480) {
+        document.getElementById("hud").style = ('display: block');
+    }
 }
 
 function removeGameOverScreen() {
@@ -58,6 +62,41 @@ function enterFullscreen(element) {
     } else if (element.webkitRequestFullscreen) {  // iOS Safari
         element.webkitRequestFullscreen();
     }
+}
+
+function bindBtnPress() {
+    document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+    document.getElementById('btnLeft').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+    document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+    document.getElementById('btnRight').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+    document.getElementById('btnUp').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    });
+    document.getElementById('btnUp').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    });
+    document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.D = true;
+    });
+    document.getElementById('btnThrow').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.D = false;
+    });
 }
 
 window.addEventListener("keydown", (e) => {
