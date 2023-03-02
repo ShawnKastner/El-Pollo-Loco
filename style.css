@@ -36,6 +36,7 @@ canvas {
     border-radius: 8px;
     width: 80px;
     height: 35px;
+    color: black;
     font-size: 35px;
     font-family: 'Zabars';
     cursor: pointer;
