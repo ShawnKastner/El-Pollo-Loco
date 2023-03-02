@@ -29,6 +29,9 @@ canvas {
 }
 
 .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #ffe000;
     border-radius: 8px;
     width: 80px;
@@ -124,6 +127,11 @@ canvas {
     body {
         background-image: none;
         overflow: hidden;
+    }
+
+    .btn {
+        width: 100px;
+        height: 45px;
     }
 
     .btnContainer {
