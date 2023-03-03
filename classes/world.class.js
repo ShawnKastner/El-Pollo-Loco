@@ -36,12 +36,12 @@ class World {
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
             this.checkOnTopOfEnemy();
+            this.checkBonusHp();
         }, 50)
         setInterval(() => {
             this.checkCollisionWithEndboss();
             this.checkThrowObjects();
             this.checkCollisionThrowableObjects();
-            this.checkBonusHp();
             this.gameOver();
         }, 200)
         setInterval(() => {

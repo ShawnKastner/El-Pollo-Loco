@@ -51,17 +51,19 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-8.png',
         'img/2_character_pepe/1_idle/idle/I-9.png',
         'img/2_character_pepe/1_idle/idle/I-10.png',
-        'img/2_character_pepe/1_idle/idle/I-11.png',
-        'img/2_character_pepe/1_idle/idle/I-12.png',
-        'img/2_character_pepe/1_idle/idle/I-13.png',
-        'img/2_character_pepe/1_idle/idle/I-14.png',
-        'img/2_character_pepe/1_idle/idle/I-15.png',
-        'img/2_character_pepe/1_idle/idle/I-16.png',
-        'img/2_character_pepe/1_idle/idle/I-17.png',
-        'img/2_character_pepe/1_idle/idle/I-18.png',
-        'img/2_character_pepe/1_idle/idle/I-19.png',
-        'img/2_character_pepe/1_idle/idle/I-20.png',
     ];
+
+    images_longIdle = [
+        'img/2_character_pepe/1_idle/long_idle/I-11.png',
+        'img/2_character_pepe/1_idle/long_idle/I-12.png',
+        'img/2_character_pepe/1_idle/long_idle/I-13.png',
+        'img/2_character_pepe/1_idle/long_idle/I-14.png',
+        'img/2_character_pepe/1_idle/long_idle/I-15.png',
+        'img/2_character_pepe/1_idle/long_idle/I-16.png',
+        'img/2_character_pepe/1_idle/long_idle/I-17.png',
+        'img/2_character_pepe/1_idle/long_idle/I-18.png',
+        'img/2_character_pepe/1_idle/long_idle/I-19.png',
+        'img/2_character_pepe/1_idle/long_idle/I-20.png']
 
     world;
     walking_sound = new Audio('audio/walking.mp3');
@@ -71,6 +73,9 @@ class Character extends MovableObject {
         left: 45,
         right: 45
     };
+    lostTime = 0;
+    idle = false;
+    longIdle = false;
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -78,7 +83,10 @@ class Character extends MovableObject {
         this.loadImages(this.images_jumping);
         this.loadImages(this.images_dead);
         this.loadImages(this.images_hurt);
+        this.loadImages(this.images_idle);
+        this.loadImages(this.images_longIdle);
 
+        this.checkIdle();
         this.animate();
         this.applyGravity();
     }
@@ -95,32 +103,68 @@ class Character extends MovableObject {
             this.moveRight();
             this.walking_sound.play();
             this.playWalkingSound();
+            this.lostTime = new Date().getTime();
         }
         if (this.world.keyboard.LEFT && this.x > 0) {
             this.moveLeft();
             this.otherDirection = true;
             this.playWalkingSound();
+            this.lostTime = new Date().getTime();
         }
         if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             this.jump();
+            this.lostTime = new Date().getTime();
         }
         this.world.camera_x = -this.x + 100;
     }
 
     playCharacterAnimation() {
+        if (this.idle) { this.playAnimation(this.images_idle) };
+        if (this.longIdle) { this.playAnimation(this.images_longIdle) };
         if (this.isDead()) {
             this.playAnimation(this.images_dead);
         } else if (this.isHurt()) {
             this.playAnimation(this.images_hurt);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.images_jumping);
+            this.deactivateIdle();
         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             this.playAnimation(this.images_walking);
+            this.deactivateIdle();
         }
     }
 
     playWalkingSound() {
         this.walking_sound.play();
         this.walking_sound.volume = 0.2;
+    }
+
+    checkIdle() {
+        setStopableInterval(() => {
+            if (this.characterInactive()) {
+                let timePassed = new Date().getTime() - this.lostTime;
+                timePassed = timePassed / 1000;
+                if (timePassed > 3) {
+                    this.idle = true;
+                } if (timePassed > 6) {
+                    this.idle = false;
+                    this.longIdle = true;
+                }
+            }
+        }, 1000);
+    }
+
+    deactivateIdle() {
+        this.idle = false;
+        this.longIdle = false;
+    }
+
+    characterInactive() {
+        return (
+            !this.world.keyboard.RIGHT ||
+            !this.world.keyboard.LEFT ||
+            !this.world.keyboard.SPACE ||
+            !this.world.keyboard.D
+        );
     }
 }
