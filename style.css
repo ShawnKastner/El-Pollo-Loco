@@ -93,18 +93,28 @@ canvas {
 }
 
 .upperPanel {
+    display: flex;
+    gap: 8px;
     position: absolute;
     top: 5px;
     right: 5px;
+    z-index: 999;
 }
 
-.noteImg {
+.upperPanelImg {
     width: 35px;
     height: 35px;
     border: 2px solid black;
     border-radius: 8px;
     background-color: #ffe000;
     cursor: pointer;
+}
+
+.instructionContainer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
 }
 
 @media only screen and (max-width: 720px) {

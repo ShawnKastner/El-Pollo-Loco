@@ -30,7 +30,7 @@ function setStopableInterval(fn, time) {
 function removeClasses() {
     document.getElementById('startScreen').classList.add('dNone');
     document.getElementById('canvas').classList.remove('dNone');
-    if(window.innerHeight <= 480) {
+    if (window.innerHeight <= 480) {
         document.getElementById('hud').style = ('display: block');
     }
 }
@@ -50,6 +50,15 @@ function muteBgMusic() {
         background_music.muted = true;
     } else {
         background_music.muted = false;
+    }
+}
+
+function showInstructions() {
+    let showInstructions = document.getElementById('instructions');
+    if (showInstructions.classList.contains('dNone')) {
+        showInstructions.classList.remove('dNone');
+    } else {
+        showInstructions.classList.add('dNone');
     }
 }
 

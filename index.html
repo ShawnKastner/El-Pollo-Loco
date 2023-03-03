@@ -62,8 +62,20 @@
         </div>
 
         <div class="upperPanel">
-            <img onclick="muteBgMusic()" class="noteImg" src="img/note.ico">
+            <img onclick="showInstructions()" class="upperPanelImg" src="img/instruction.png">
+            <img onclick="muteBgMusic()" class="upperPanelImg" src="img/note.ico">
         </div>
+
+        <div id="instructions" class="dNone instructionContainer">
+            <h3>Instructions</h3>
+            <span>
+                Left arrow = Move Left <br>
+                Reft right = Move right <br>
+                Space = Jump <br>
+                D = Throw <br>
+            </span>
+        </div>
+
         <div id="hud">
             <div class="panel1">
                 <img class="mobileBtn" id="btnLeft" src="img/left.ico">
