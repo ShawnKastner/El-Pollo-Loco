@@ -88,16 +88,12 @@ canvas {
     width: 100%;
 }
 
-#hud {
-    display: none;
-}
-
 .upperPanel {
     display: flex;
-    gap: 8px;
+    gap: 24px;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 20px;
     z-index: 999;
 }
 
@@ -154,6 +150,15 @@ canvas {
 }
 
 @media only screen and (max-height: 480px) {
+    canvas, .startScreenImg {
+        border-radius: unset;
+    }
+
+    #fullscreen {
+        height: 100vh;
+        width: 100%;
+    }
+
     body {
         background-image: none;
         overflow: hidden;
@@ -165,7 +170,7 @@ canvas {
     }
 
     .btnContainer {
-        bottom: 195px;
+        bottom: 95px;
     }
 
     .startScreenImg {
@@ -189,16 +194,16 @@ canvas {
     .panel1 {
         display: flex;
         position: absolute;
-        gap: 18px;
-        bottom: 20px;
+        gap: 24px;
+        bottom: 30px;
         left: 20px;
     }
     
     .panel2 {
         display: flex;
         position: absolute;
-        gap: 18px;
-        bottom: 20px;
+        gap: 24px;
+        bottom: 30px;
         right: 20px;
     }
     

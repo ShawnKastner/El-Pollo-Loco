@@ -30,9 +30,9 @@ function setStopableInterval(fn, time) {
 function removeClasses() {
     document.getElementById('startScreen').classList.add('dNone');
     document.getElementById('canvas').classList.remove('dNone');
-    if (window.innerHeight <= 480) {
-        document.getElementById('hud').style = ('display: block');
-    }
+    if(window.innerHeight <= 480) {
+        document.getElementById('hud').classList.remove('dNone');
+    } 
 }
 
 function removeGameOverScreen() {
