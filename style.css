@@ -19,6 +19,8 @@ body {
 }
 
 canvas {
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px 2px black;
     background-color: black;
     display: block;
 }
@@ -26,6 +28,8 @@ canvas {
 .startScreenImg {
     height: 480px;
     width: 720px;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px 2px black;
 }
 
 .btn {
@@ -86,6 +90,21 @@ canvas {
 
 #hud {
     display: none;
+}
+
+.upperPanel {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.noteImg {
+    width: 35px;
+    height: 35px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: #ffe000;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 720px) {

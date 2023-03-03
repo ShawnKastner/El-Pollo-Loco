@@ -31,7 +31,7 @@ function removeClasses() {
     document.getElementById('startScreen').classList.add('dNone');
     document.getElementById('canvas').classList.remove('dNone');
     if(window.innerHeight <= 480) {
-        document.getElementById("hud").style = ('display: block');
+        document.getElementById('hud').style = ('display: block');
     }
 }
 
@@ -43,6 +43,14 @@ function bgMusic() {
     background_music.volume = 0.2;
     background_music.loop = true;
     background_music.play();
+}
+
+function muteBgMusic() {
+    if (background_music.muted == false) {
+        background_music.muted = true;
+    } else {
+        background_music.muted = false;
+    }
 }
 
 function stopGame() {
