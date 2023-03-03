@@ -190,6 +190,10 @@ canvas {
     .fullscreenImg {
         display: none;
     }
+
+    #hud {
+        display: flex;
+    }
     
     .panel1 {
         display: flex;

@@ -30,9 +30,13 @@ function setStopableInterval(fn, time) {
 function removeClasses() {
     document.getElementById('startScreen').classList.add('dNone');
     document.getElementById('canvas').classList.remove('dNone');
-    if(window.innerHeight <= 480) {
-        document.getElementById('hud').classList.remove('dNone');
-    } 
+    // if(window.innerHeight <= 480) {
+    //     document.getElementById('hud').classList.remove('dNone');
+    // } 
+    document.getElementById('btnLeft').classList.remove('dNone');
+    document.getElementById('btnRight').classList.remove('dNone');
+    document.getElementById('btnUp').classList.remove('dNone');
+    document.getElementById('btnThrow').classList.remove('dNone');
 }
 
 function removeGameOverScreen() {
