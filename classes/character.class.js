@@ -73,7 +73,7 @@ class Character extends MovableObject {
         left: 45,
         right: 45
     };
-    lostTime = 0;
+    lastInteraction = 0;
     idle = false;
     longIdle = false;
 
@@ -99,23 +99,43 @@ class Character extends MovableObject {
 
     moveCharacter() {
         this.walking_sound.pause();
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        if (this.canMoveRight()) {
             this.moveRight();
-            this.walking_sound.play();
-            this.playWalkingSound();
-            this.lostTime = new Date().getTime();
         }
-        if (this.world.keyboard.LEFT && this.x > 0) {
-            this.moveLeft();
-            this.otherDirection = true;
-            this.playWalkingSound();
-            this.lostTime = new Date().getTime();
+        if (this.canMoveLeft()) {
+            this.moveLeft()
         }
-        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+        if (this.canJump()) {
             this.jump();
             this.lostTime = new Date().getTime();
         }
         this.world.camera_x = -this.x + 100;
+    }
+
+    canMoveRight() {
+        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
+    }
+
+    moveRight() {
+        super.moveRight();
+        this.walking_sound.play();
+        this.playWalkingSound();
+        this.lastInteraction = new Date().getTime();
+    }
+
+    canMoveLeft() {
+        return this.world.keyboard.LEFT && this.x > 0;
+    }
+
+    moveLeft() {
+        super.moveLeft();
+        this.otherDirection = true;
+        this.playWalkingSound();
+        this.lostTime = new Date().getTime();
+    }
+
+    canJump() {
+        return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 
     playCharacterAnimation() {
@@ -142,7 +162,7 @@ class Character extends MovableObject {
     checkIdle() {
         setStopableInterval(() => {
             if (this.characterInactive()) {
-                let timePassed = new Date().getTime() - this.lostTime;
+                let timePassed = new Date().getTime() - this.lastInteraction;
                 timePassed = timePassed / 1000;
                 if (timePassed > 3) {
                     this.idle = true;
