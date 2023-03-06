@@ -63,20 +63,31 @@ function muteBgMusic() {
 }
 
 function muteSounds() {
-    if (drink_sound.muted == false || collectCoin_sound.muted == false || killChicken_sound.muted == false || collectHealth_sound.muted == false || hitted_sound.muted == false) {
-        drink_sound.muted = true;
-        collectCoin_sound.muted = true;
-        killChicken_sound.muted = true;
-        collectHealth_sound.muted = true;
-        hitted_sound.muted = true;
+    if (allSoundsMutedFalse()) {
+        setAllSoundsMutedTrue();
     } else {
-        drink_sound.muted = false;
-        collectCoin_sound.muted = false;
-        killChicken_sound.muted = false;
-        collectHealth_sound.muted = false;
-        hitted_sound.muted = false;
+        setAllSoundsMutedFalse();
     }
+}
 
+function allSoundsMutedFalse() {
+    drink_sound.muted == false || collectCoin_sound.muted == false || killChicken_sound.muted == false || collectHealth_sound.muted == false || hitted_sound.muted == false
+}
+
+function setAllSoundsMutedTrue() {
+    drink_sound.muted = true;
+    collectCoin_sound.muted = true;
+    killChicken_sound.muted = true;
+    collectHealth_sound.muted = true;
+    hitted_sound.muted = true;
+}
+
+function setAllSoundsMutedFalse() {
+    drink_sound.muted = false;
+    collectCoin_sound.muted = false;
+    killChicken_sound.muted = false;
+    collectHealth_sound.muted = false;
+    hitted_sound.muted = false;
 }
 
 function showInstructions() {
