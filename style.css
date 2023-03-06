@@ -158,6 +158,10 @@ canvas {
         justify-content: center;
         align-items: center;
     }
+
+    .instructionContainer{
+        display: none;
+    }
 }
 
 @media only screen and (max-height: 480px) {
