@@ -3,6 +3,11 @@ let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
 let i = 1;
+drink_sound = new Audio('audio/drinking.mp3');
+collectCoin_sound = new Audio('audio/collectCoin.mp3');
+killChicken_sound = new Audio('audio/jumpOnChicken.mp3');
+collectHealth_sound = new Audio('audio/collectHealth.mp3');
+hitted_sound = new Audio('audio/hitted.mp3');
 background_music = new Audio('audio/backgroundMusic.mp3');
 let gameIsOver = false;
 
@@ -55,6 +60,23 @@ function muteBgMusic() {
     } else {
         background_music.muted = false;
     }
+}
+
+function muteSounds() {
+    if (drink_sound.muted == false || collectCoin_sound.muted == false || killChicken_sound.muted == false || collectHealth_sound.muted == false || hitted_sound.muted == false) {
+        drink_sound.muted = true;
+        collectCoin_sound.muted = true;
+        killChicken_sound.muted = true;
+        collectHealth_sound.muted = true;
+        hitted_sound.muted = true;
+    } else {
+        drink_sound.muted = false;
+        collectCoin_sound.muted = false;
+        killChicken_sound.muted = false;
+        collectHealth_sound.muted = false;
+        hitted_sound.muted = false;
+    }
+
 }
 
 function showInstructions() {
