@@ -84,8 +84,9 @@ class World {
 
     checkOnTopOfEnemy() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.hitted == true) {
+            if (this.character.isAboveGround() && this.character.isColliding(enemy) && !this.character.isHurt() && !enemy.hitted == true) {
                 enemy.hit();
+                this.character.jump();
                 if (killChicken_sound.muted == false) {
                     killChicken_sound.play();
                 }

@@ -71,7 +71,7 @@ function muteSounds() {
 }
 
 function allSoundsMutedFalse() {
-    drink_sound.muted == false || collectCoin_sound.muted == false || killChicken_sound.muted == false || collectHealth_sound.muted == false || hitted_sound.muted == false
+    return drink_sound.muted == false || collectCoin_sound.muted == false || killChicken_sound.muted == false || collectHealth_sound.muted == false || hitted_sound.muted == false;
 }
 
 function setAllSoundsMutedTrue() {
