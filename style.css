@@ -144,8 +144,9 @@ canvas {
         top: 0;
         bottom: 0;
         background-color: black;
-        height: 480px;
+        height: 100%;
         width: 100%;
+        z-index: 1000;
     }
 
     .rotateYourDevice {
