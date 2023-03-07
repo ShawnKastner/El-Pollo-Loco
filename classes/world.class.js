@@ -34,14 +34,12 @@ class World {
             this.checkBonusHp();
         }, 50)
         setInterval(() => {
+            this.checkCollisions();
             this.checkCollisionWithEndboss();
             this.checkThrowObjects();
             this.checkCollisionThrowableObjects();
             this.gameOver();
         }, 200)
-        setInterval(() => {
-            this.checkCollisions();
-        }, 300);
     }
 
     gameOver() {
@@ -119,7 +117,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !enemy.hitted == true && !gameIsOver == true) {
+            if (this.character.isColliding(enemy) && !enemy.hitted == true && !gameIsOver == true && !this.character.isAboveGround()) {
                 this.character.hit();
                 if (hitted_sound.muted == false) {
                     hitted_sound.play();
