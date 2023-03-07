@@ -71,7 +71,7 @@ function muteSounds() {
 }
 
 function allSoundsMutedFalse() {
-    return drink_sound.muted == false || collectCoin_sound.muted == false || killChicken_sound.muted == false || collectHealth_sound.muted == false || hitted_sound.muted == false;
+    return world.character.walking_sound.muted == false || drink_sound.muted == false || collectCoin_sound.muted == false || killChicken_sound.muted == false || collectHealth_sound.muted == false || hitted_sound.muted == false;
 }
 
 function setAllSoundsMutedTrue() {
@@ -80,6 +80,7 @@ function setAllSoundsMutedTrue() {
     killChicken_sound.muted = true;
     collectHealth_sound.muted = true;
     hitted_sound.muted = true;
+    world.character.walking_sound.muted = true;
 }
 
 function setAllSoundsMutedFalse() {
@@ -88,6 +89,7 @@ function setAllSoundsMutedFalse() {
     killChicken_sound.muted = false;
     collectHealth_sound.muted = false;
     hitted_sound.muted = false;
+    world.character.walking_sound.muted = false;
 }
 
 function showInstructions() {
