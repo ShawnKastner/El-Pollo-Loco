@@ -92,6 +92,15 @@ function setAllSoundsMutedFalse() {
     world.character.walking_sound.muted = false;
 }
 
+function restartMusic() {
+    if(background_music.pause()) {
+        background_music.play()
+    } else {
+        background_music.pause();
+        background_music.currentTime = 0;
+    }
+}
+
 function showInstructions() {
     let showInstructions = document.getElementById('instructions');
     if (showInstructions.classList.contains('dNone')) {

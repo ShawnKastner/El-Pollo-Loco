@@ -174,6 +174,7 @@ class World {
         this.resetCoins();
         this.resetEndboss();
         this.resetSmallChicken();
+        restartMusic();
     }
 
     resetCoins() {
@@ -200,6 +201,7 @@ class World {
 
     resetEndboss() {
         this.endboss.energy = 100;
+        this.endboss.x = 6500;
     }
 
     muteAllSounds() {
