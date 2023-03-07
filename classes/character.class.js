@@ -66,7 +66,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/long_idle/I-20.png']
 
     world;
-    walking_sound = new Audio('audio/walking.mp3');
+
     offset = {
         top: 120,
         bottom: 30,
@@ -98,7 +98,7 @@ class Character extends MovableObject {
     }
 
     moveCharacter() {
-        this.walking_sound.pause();
+        walking_sound.pause();
         if (this.canMoveRight()) {
             this.moveRight();
         }
@@ -118,7 +118,7 @@ class Character extends MovableObject {
 
     moveRight() {
         super.moveRight();
-        this.walking_sound.play();
+        walking_sound.play();
         this.playWalkingSound();
         this.lastInteraction = new Date().getTime();
     }
@@ -155,8 +155,8 @@ class Character extends MovableObject {
     }
 
     playWalkingSound() {
-        this.walking_sound.play();
-        this.walking_sound.volume = 0.2;
+        walking_sound.play();
+        walking_sound.volume = 0.2;
     }
 
     checkIdle() {
@@ -164,9 +164,9 @@ class Character extends MovableObject {
             if (this.characterInactive()) {
                 let timePassed = new Date().getTime() - this.lastInteraction;
                 timePassed = timePassed / 1000;
-                if (timePassed > 3) {
+                if (timePassed > 0) {
                     this.idle = true;
-                } if (timePassed > 6) {
+                } if (timePassed > 3) {
                     this.idle = false;
                     this.longIdle = true;
                 }

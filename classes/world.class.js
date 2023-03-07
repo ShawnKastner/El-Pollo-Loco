@@ -31,7 +31,6 @@ class World {
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
             this.checkOnTopOfEnemy();
-            this.checkBonusHp();
         }, 50)
         setInterval(() => {
             this.checkCollisions();
@@ -62,22 +61,6 @@ class World {
             gameIsOver = true;
             stopGame();
         }
-    }
-
-    checkBonusHp() {
-        this.level.smallChicken.forEach((sC) => {
-            if (this.character.isColliding(sC)) {
-                if (this.character.energy > 100) {
-                    this.character.energy = 100;
-                } if (this.character.energy < 100) {
-                    this.character.energy += 10;
-                } if (collectHealth_sound.muted == false) {
-                    collectHealth_sound.play();
-                }
-                this.level.smallChicken.splice(sC, 1);
-                this.statusBar.setPercentage(this.character.energy);
-            }
-        })
     }
 
     checkOnTopOfEnemy() {
@@ -234,7 +217,6 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottle);
-        this.addObjectsToMap(this.level.smallChicken);
         this.addObjectsToMap(this.throwableObject);
         this.addToMap(this.character);
         this.addToMap(this.endboss);

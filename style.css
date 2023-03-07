@@ -121,6 +121,40 @@ canvas {
     height: 100%;
 }
 
+.line1 {
+    height: 5px;
+    background: black;
+    width: 47px;
+    position: absolute;
+    right: 59px;
+    top: 16px;
+    transform: rotate(45deg);
+    border-radius: 8px;
+}
+
+.line2 {
+    left: 122px;
+}
+
+.soundBtnText {
+    display: flex;
+    text-align: center;
+    font-size: 8px;
+    position: absolute;
+    top: 40px;
+    right: 71px;
+    font-family: arial;
+    font-weight: 700;
+}
+
+.soundsOnOffPosition {
+    left: 130px;
+}
+
+.soundDNone {
+    display: none;
+}
+
 @media only screen and (max-width: 720px) {
     body {
         height: 100vh;
@@ -159,7 +193,7 @@ canvas {
         align-items: center;
     }
 
-    .instructionContainer{
+    .instructionContainer {
         display: none;
     }
 }

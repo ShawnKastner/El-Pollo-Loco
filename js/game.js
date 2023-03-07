@@ -10,6 +10,8 @@ collectHealth_sound = new Audio('audio/collectHealth.mp3');
 hitted_sound = new Audio('audio/hitted.mp3');
 background_music = new Audio('audio/backgroundMusic.mp3');
 let gameIsOver = false;
+notInFullscreen = false;
+walking_sound = new Audio('audio/walking.mp3')
 
 
 function init() {
@@ -57,21 +59,25 @@ function bgMusic() {
 function muteBgMusic() {
     if (background_music.muted == false) {
         background_music.muted = true;
+        document.getElementById('bgMusicMuted').classList.remove('soundDNone');
     } else {
         background_music.muted = false;
+        document.getElementById('bgMusicMuted').classList.add('soundDNone');
     }
 }
 
 function muteSounds() {
     if (allSoundsMutedFalse()) {
         setAllSoundsMutedTrue();
+        document.getElementById('soundsMuted').classList.remove('soundDNone');
     } else {
         setAllSoundsMutedFalse();
+        document.getElementById('soundsMuted').classList.add('soundDNone');
     }
 }
 
 function allSoundsMutedFalse() {
-    return world.character.walking_sound.muted == false || drink_sound.muted == false || collectCoin_sound.muted == false || killChicken_sound.muted == false || collectHealth_sound.muted == false || hitted_sound.muted == false;
+    return walking_sound.muted = false || drink_sound.muted == false || collectCoin_sound.muted == false || killChicken_sound.muted == false || collectHealth_sound.muted == false || hitted_sound.muted == false;
 }
 
 function setAllSoundsMutedTrue() {
@@ -80,7 +86,7 @@ function setAllSoundsMutedTrue() {
     killChicken_sound.muted = true;
     collectHealth_sound.muted = true;
     hitted_sound.muted = true;
-    world.character.walking_sound.muted = true;
+    walking_sound.muted = true;
 }
 
 function setAllSoundsMutedFalse() {
@@ -89,11 +95,11 @@ function setAllSoundsMutedFalse() {
     killChicken_sound.muted = false;
     collectHealth_sound.muted = false;
     hitted_sound.muted = false;
-    world.character.walking_sound.muted = false;
+    walking_sound.muted = false;
 }
 
 function restartMusic() {
-    if(background_music.pause()) {
+    if (background_music.pause()) {
         background_music.play()
     } else {
         background_music.pause();
@@ -116,7 +122,13 @@ function stopGame() {
 
 function openFullscreen() {
     let openFullscreen = document.getElementById('fullscreen');
-    enterFullscreen(openFullscreen);
+    if (notInFullscreen == false) {
+        notInFullscreen = true;
+        enterFullscreen(openFullscreen);
+    } else {
+        notInFullscreen = false;
+        exitFullscreen();
+    }
 }
 
 function enterFullscreen(element) {
@@ -126,6 +138,14 @@ function enterFullscreen(element) {
         element.msRequestFullscreen();
     } else if (element.webkitRequestFullscreen) {  // iOS Safari
         element.webkitRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
     }
 }
 

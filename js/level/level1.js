@@ -12,6 +12,12 @@ function initLevel() {
             new Chicken(),
             new Chicken(),
             new Chicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
+            new SmallChicken(),
         ],
         [
             new Cloud(),
@@ -90,14 +96,6 @@ function initLevel() {
             new Bottle(3500, 250),
             new Bottle(3600, 250),
             new Bottle(3700, 250),
-        ],
-        [
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-        ]
+        ],        
     );
 }
