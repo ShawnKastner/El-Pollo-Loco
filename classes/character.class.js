@@ -70,8 +70,8 @@ class Character extends MovableObject {
     offset = {
         top: 120,
         bottom: 30,
-        left: 45,
-        right: 45
+        left: 55,
+        right: 55
     };
     lastInteraction = 0;
     idle = false;

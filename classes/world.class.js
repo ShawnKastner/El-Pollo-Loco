@@ -65,7 +65,7 @@ class World {
 
     checkOnTopOfEnemy() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isAboveGround() && this.character.isColliding(enemy) && !this.character.isHurt() && !enemy.hitted == true) {
+            if (this.character.isAboveGround() && this.character.isColliding(enemy) && !this.character.isHurt() && !enemy.hitted == true && this.character.speedY < 0) {
                 enemy.hit();
                 this.character.jump();
                 if (killChicken_sound.muted == false) {
@@ -176,10 +176,6 @@ class World {
 
     resetChicken() {
         this.level.enemies.splice(0, this.level.enemies.length);
-    }
-
-    resetSmallChicken() {
-        this.level.smallChicken.splice(0, this.level.smallChicken.length);
     }
 
     resetEndboss() {
